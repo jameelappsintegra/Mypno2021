@@ -31,7 +31,31 @@ const Home = () => {
 
   return (
     <>
-      <h1>Blog posts</h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1>Blog posts</h1>
+        <Link
+          style={{
+            height: "32px",
+            border: "none",
+            color: "#fff",
+            backgroundColor: "#039be5",
+            borderRadius: "4px",
+            padding: "8px 12px",
+            fontSize: "0.9rem",
+            marginLeft: "24px",
+            textDecoration: "none",
+          }}
+          to="/create"
+        >
+          Create
+        </Link>
+      </div>
       <p>
         Welcome to the starter code! We're showing hard-coded data right now.
       </p>

@@ -31,7 +31,11 @@ const Post = ({ match }) => {
 
   return (
     <>
-      <img src={currentPost.coverImage} alt={currentPost.coverImageAlt} />
+      <img
+        src={currentPost.coverImage}
+        alt={currentPost.coverImageAlt}
+        style={{ width: "100%" }}
+      />
       <div
         style={{
           display: "flex",

@@ -19,9 +19,9 @@ const inputStyles = {
 const Edit = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
   const [currentPost, setCurrentPost] = useState({});
-  const [slug, setSlug] = useState(match.params.slug);
 
   useEffect(() => {
+    const slug = match.params.slug;
     getFirebase()
       .database()
       .ref(`posts/${slug}`)
@@ -32,11 +32,7 @@ const Edit = ({ match, history }) => {
         }
         setLoading(false);
       });
-  }, [currentPost ]);
-
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+  }, [match]);
 
   const [title, setTitle] = useState(currentPost.title);
   const [coverImage, setCoverImage] = useState(currentPost.coverImage);
@@ -45,23 +41,65 @@ const Edit = ({ match, history }) => {
 
   const savePost = () => {
     const updatePost = {
-      title,
-      slug,
-      coverImage,
-      coverImageAlt,
-      content,
+      title: title === undefined ? currentPost.title : title,
+      dateFormatted: currentPost.dateFormatted,
+      datePretty: currentPost.datePretty,
+      slug: currentPost.slug,
+      coverImage:
+        coverImage === undefined ? currentPost.coverImage : coverImage,
+      coverImageAlt:
+        coverImageAlt === undefined ? currentPost.coverImageAlt : coverImageAlt,
+      content: content === undefined ? currentPost.content : content,
     };
 
     getFirebase()
       .database()
-      .ref(`posts/${slug}`)
+      .ref(`posts/${currentPost.slug}`)
       .set(updatePost)
-      .then(() => history.push(`/${slug}`));
+      .then(() => history.push(`/${currentPost.slug}`));
   };
+
+  const deletePost = () => {
+    getFirebase()
+      .database()
+      .ref(`/posts/${currentPost.slug}`)
+      .remove()
+      .then(() => {
+        history.push("/");
+      });
+  };
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
-      <h1>Edit post</h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1>Edit post</h1>
+        <button
+          style={{
+            height: "32px",
+            border: "none",
+            color: "#fff",
+            backgroundColor: "#d32f2f",
+            borderRadius: "4px",
+            padding: "8px 12px",
+            fontSize: "0.9rem",
+            marginLeft: "24px",
+            textDecoration: "none",
+          }}
+          onClick={deletePost}
+        >
+          Delete
+        </button>
+      </div>
       <section style={{ margin: "2rem 0" }}>
         <label style={labelStyles} htmlFor="title-field">
           Title
@@ -70,21 +108,9 @@ const Edit = ({ match, history }) => {
           style={inputStyles}
           id="title-field"
           type="text"
-          value={title || currentPost.title}
+          value={title === undefined ? currentPost.title : title}
           onChange={({ target: { value } }) => {
             setTitle(value);
-          }}
-        />
-        <label style={labelStyles} htmlFor="slug-field">
-          Slug
-        </label>
-        <input
-          style={inputStyles}
-          id="slug-field"
-          type="text"
-          value={slug}
-          onChange={({ target: { value } }) => {
-            setSlug(value);
           }}
         />
 
@@ -95,7 +121,7 @@ const Edit = ({ match, history }) => {
           style={inputStyles}
           id="cover-image-field"
           type="text"
-          value={coverImage || currentPost.coverImage}
+          value={coverImage === undefined ? currentPost.coverImage : coverImage}
           onChange={({ target: { value } }) => {
             setCoverImage(value);
           }}
@@ -108,7 +134,11 @@ const Edit = ({ match, history }) => {
           style={inputStyles}
           id="cover-image-alt-field"
           type="text"
-          value={coverImageAlt || currentPost.coverImageAlt}
+          value={
+            coverImageAlt === undefined
+              ? currentPost.coverImageAlt
+              : coverImageAlt
+          }
           onChange={({ target: { value } }) => {
             setCoverImageAlt(value);
           }}
@@ -121,7 +151,7 @@ const Edit = ({ match, history }) => {
           style={{ ...inputStyles, height: 200, verticalAlign: "top" }}
           id="content"
           type="text"
-          value={content || currentPost.content}
+          value={content === undefined ? currentPost.content : content}
           onChange={({ target: { value } }) => {
             setContent(value);
           }}

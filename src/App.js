@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/create" component={Create} />
-          <Route path="/edit" component={Edit} />
+          <Route path="/edit/:slug" component={Edit} />
           <Route path="/sigin" component={SignIn} />
           <Route path="/404" component={NoMatch} />
           <Route path="/:slug" component={Post} />
