@@ -14,6 +14,7 @@ li {
   border: 1px solid grey;
   border-radius: 4px;
   margin-top: 24px;
+  font-family: "Kavivanar", cursive;
 }
 
 .card img {
@@ -30,5 +31,5 @@ li {
 }
 
 .main {
-  margin-top: 64px;
+  margin-top: 54px;
 }
