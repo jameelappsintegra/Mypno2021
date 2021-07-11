@@ -1,16 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Kavivanar&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
-  color: black;
+  font-family: "Kavivanar", cursive;
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #fafafa;
+  height: 100vh;
 }
 
 h1,
 h2 {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }

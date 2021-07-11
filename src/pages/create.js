@@ -17,6 +17,7 @@ const inputStyles = {
 };
 
 const Create = ({ history }) => {
+  const id = 0;
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [coverImage, setCoverImage] = useState("");
@@ -44,13 +45,15 @@ const Create = ({ history }) => {
       pretty: now.toLocaleDateString("en-US", options),
     };
   };
+
   const createPost = () => {
     const date = generateDate();
     const newPost = {
+      id: date.formatted,
       title,
       dateFormatted: date.formatted,
       datePretty: date.pretty,
-      slug,
+      slug: slug === "" ? title.replace(" ", "-") : slug,
       coverImage,
       coverImageAlt,
       content,

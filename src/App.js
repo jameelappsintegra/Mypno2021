@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 
@@ -8,21 +8,47 @@ import NoMatch from "./pages/no-match";
 import Create from "./pages/create";
 import SignIn from "./pages/signin";
 import Edit from "./pages/edit";
+import Toolbar from "./components/Toolbar/Toolbar";
+import SideDrawer from "./components/SideDrawer/SideDrawer";
+import Backdrop from "./components/Backdrop/Backdrop";
 
 function App() {
+  const [sideDrawerOpen, setsideDrawerOpen] = useState(false)
+
+  const drawerToggleClickHandler = () => {
+    console.log('====================================');
+    console.log(sideDrawerOpen);
+    console.log('====================================');
+    if (!sideDrawerOpen) {
+      setsideDrawerOpen(true)
+    }
+  }
+
+  const backDropClick = () => {
+    if (sideDrawerOpen) {
+      setsideDrawerOpen(false)
+    }
+  }
+
+  let sideDrawer;
+  let backDrop;
+
+  if (sideDrawerOpen) {
+    sideDrawer = <SideDrawer />
+    backDrop = <Backdrop click={backDropClick} />
+  }
+
   return (
     <Router>
-      <nav>
-        <Link to="/">
-          <h2>My PNO</h2>
-        </Link>
-      </nav>
-      <main>
+      <Toolbar drawerClickHandler={drawerToggleClickHandler} />
+      <SideDrawer show={sideDrawerOpen} />
+      {backDrop}
+      <main className="main">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/create" component={Create} />
           <Route path="/edit/:slug" component={Edit} />
-          <Route path="/sigin" component={SignIn} />
+          <Route path="/signin" component={SignIn} />
           <Route path="/404" component={NoMatch} />
           <Route path="/:slug" component={Post} />
         </Switch>

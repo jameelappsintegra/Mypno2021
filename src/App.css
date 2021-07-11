@@ -1,26 +1,15 @@
-nav,
 main {
   padding: 24px;
-}
-
-nav {
-  background-color: #039be5;
-}
-
-nav a {
-  text-decoration: none;
-}
-
-nav a h2 {
-  color: #ffffff;
-  margin: 0;
 }
 
 main {
   max-width: 700px;
   margin: 0 auto;
 }
-
+ul,
+li {
+  list-style: none;
+}
 .card {
   border: 1px solid grey;
   border-radius: 4px;
@@ -38,4 +27,8 @@ main {
 .card-content a {
   display: inline-block;
   margin-top: 12px;
+}
+
+.main {
+  margin-top: 64px;
 }
