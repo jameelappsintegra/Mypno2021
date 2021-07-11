@@ -17,7 +17,6 @@ const inputStyles = {
 };
 
 const Create = ({ history }) => {
-  const id = 0;
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [coverImage, setCoverImage] = useState("");
@@ -27,6 +26,7 @@ const Create = ({ history }) => {
   const generateDate = () => {
     const now = new Date();
     const options = { month: "long", day: "numeric", year: "numeric" };
+    let day = now.getDate();
 
     const year = now.getFullYear();
 
@@ -35,7 +35,6 @@ const Create = ({ history }) => {
       month = `0${month}`;
     }
 
-    const day = now.getDate();
     if (day < 10) {
       day = `0${day}`;
     }

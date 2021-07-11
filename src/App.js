@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/home";
@@ -13,29 +13,26 @@ import SideDrawer from "./components/SideDrawer/SideDrawer";
 import Backdrop from "./components/Backdrop/Backdrop";
 
 function App() {
-  const [sideDrawerOpen, setsideDrawerOpen] = useState(false)
+  const [sideDrawerOpen, setsideDrawerOpen] = useState(false);
 
   const drawerToggleClickHandler = () => {
-    console.log('====================================');
+    console.log("====================================");
     console.log(sideDrawerOpen);
-    console.log('====================================');
+    console.log("====================================");
     if (!sideDrawerOpen) {
-      setsideDrawerOpen(true)
+      setsideDrawerOpen(true);
     }
-  }
+  };
 
   const backDropClick = () => {
     if (sideDrawerOpen) {
-      setsideDrawerOpen(false)
+      setsideDrawerOpen(false);
     }
-  }
-
-  let sideDrawer;
+  };
   let backDrop;
 
   if (sideDrawerOpen) {
-    sideDrawer = <SideDrawer />
-    backDrop = <Backdrop click={backDropClick} />
+    backDrop = <Backdrop click={backDropClick} />;
   }
 
   return (
