@@ -3,7 +3,6 @@ main {
 }
 
 main {
-  max-width: 700px;
   margin: 0 auto;
 }
 ul,
@@ -12,17 +11,21 @@ li {
 }
 .card {
   border: 1px solid grey;
-  border-radius: 4px;
+  border-radius: 10px;
   margin-top: 24px;
   font-family: "Kavivanar", cursive;
+  background: #fff;
+  padding: 16px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .card img {
+  border-radius: 10px;
   width: 100%;
 }
 
 .card-content {
-  padding: 16px;
+  min-width: 100%;
 }
 
 .card-content a {
